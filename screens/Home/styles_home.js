@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         alignItems: 'center',
         paddingHorizontal: 5,
+        marginBottom: 20, // Ajusta el margen inferior del ListCategories
     },
     categoryBtn: {
         height: 40,
@@ -80,12 +81,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    cardContainer: {
+        marginTop: 20, // Ajusta el margen superior del contenedor del Card
+    },
     card: {
-        height: 220,
+        height: 240,
         width: cardWidth,
         marginHorizontal: 10,
-        marginBottom: 20,
-        marginTop: 20,
+        marginBottom: '30%',
         borderRadius: 15,
         elevation: 13,
         backgroundColor: 'white',

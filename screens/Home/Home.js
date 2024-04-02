@@ -7,12 +7,10 @@ import foods from '../../consts/foods';
 
 import { FlatList, TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handler';
 import { GestureHandlerRootView } from 'react-native-gesture-handler'; // Importa GestureHandlerRootView
-import { SafeAreaFrameContext, SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = () => {
   const [searchText, setSearchText] = useState('');
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
-  const [contentHeight, setContentHeight] = useState(0);
 
   const ListCategories = () => {
     return (
@@ -87,9 +85,7 @@ const Home = () => {
     );
   };
 
-  const handleContentSizeChange = (width, height) => {
-    setContentHeight(height);
-  };
+
 
   return (
     <GestureHandlerRootView>
@@ -115,13 +111,15 @@ const Home = () => {
           <ListCategories />
         </View>
       </View>
-      
-        <FlatList
-          showsVerticalScrollIndicator={true}
-          numColumns={2}
-          data={foods}
-          renderItem={({ item }) => <Card food={item} />}
-        />
+      <ScrollView
+      showsVerticalScrollIndicator={true}
+      contentContainerStyle={{ minHeight: '100%' }}>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        {foods.map((item, index) => (
+          <Card key={index} food={item} />
+        ))}
+      </View>
+    </ScrollView>
     </GestureHandlerRootView>
   );
 };
