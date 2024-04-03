@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#cccccc50',
     fontFamily: 'MochiyPopOne-Regular',
     borderRadius: 30,
-    marginVertical: 10, // Aquí se ajustó la distancia vertical
+    marginVertical: 10, 
     flexDirection: 'row'
   },
   icon_user: {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#cccccc50',
     fontFamily: 'MochiyPopOne-Regular',
     borderRadius: 30,
-    marginVertical: 10, // Aquí se ajustó la distancia vertical
+    marginVertical: 10, 
     flexDirection: 'row'
   },
   icon_mail: {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#cccccc50',
     fontFamily: 'MochiyPopOne-Regular',
     borderRadius: 30,
-    marginVertical: 10, // Aquí se ajustó la distancia vertical
+    marginVertical: 10, 
     flexDirection: 'row'
   },
   icon_lock: {
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   P_boton_registrar: {
     alignItems: 'center',
     marginTop: 35,
-    marginBottom: 35, // Aquí se ajustó la distancia vertical
+    marginBottom: 35,
   },
   cajaboton_registrar: {
     backgroundColor: '#EF6106',

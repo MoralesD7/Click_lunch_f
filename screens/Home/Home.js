@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { View, ScrollView, TextInput, Text, Image } from 'react-native'; // Importa Text desde react-native
+import { View, ScrollView, TextInput, Text, Image, TouchableOpacity } from 'react-native';
 import styles from "../Home/styles_home";
-import AntDesign from 'react-native-vector-icons/AntDesign'; // Importa AntDesign
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import categories from '../../consts/categories';
 import foods from '../../consts/foods';
-
-import { FlatList, TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handler';
-import { GestureHandlerRootView } from 'react-native-gesture-handler'; // Importa GestureHandlerRootView
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native'; // Importa useNavigation
 
 const Home = () => {
   const [searchText, setSearchText] = useState('');
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
+  const navigation = useNavigation(); // Obtiene el objeto de navegación
 
   const ListCategories = () => {
     return (
@@ -52,15 +52,14 @@ const Home = () => {
 
   const Card = ({ food }) => {
     return (
-      <TouchableHighlight
-        underlayColor={'white'}
-        activeOpacity={0.9}
-        onPress={() => navigation.navigate('DetailsScreen', food)}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Details', food)}>
         <View style={styles.card}>
-          <View style={{ alignItems: 'center', top: -40 }}>
+          <View style={{ alignItems: 'center', top: -30 }}>
             <Image source={food.image} style={{ height: 120, width: 120 }} />
           </View>
           <View style={{ marginHorizontal: 20 }}>
+            {/* Aquí envuelve el texto dentro de un componente Text */}
             <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{food.name}</Text>
             <Text style={{ fontSize: 14, color: 'gray', marginTop: 2 }}>
               {food.ingredients}
@@ -81,12 +80,10 @@ const Home = () => {
             </View>
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   };
-
-
-
+  
   return (
     <GestureHandlerRootView>
       <View style={styles.Cont_P}>
@@ -112,14 +109,14 @@ const Home = () => {
         </View>
       </View>
       <ScrollView
-      showsVerticalScrollIndicator={true}
-      contentContainerStyle={{ minHeight: '100%' }}>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-        {foods.map((item, index) => (
-          <Card key={index} food={item} />
-        ))}
-      </View>
-    </ScrollView>
+        showsVerticalScrollIndicator={true}
+        contentContainerStyle={{ minHeight: '100%' }}>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+          {foods.map((item, index) => (
+            <Card key={index} food={item} />
+          ))}
+        </View>
+      </ScrollView>
     </GestureHandlerRootView>
   );
 };

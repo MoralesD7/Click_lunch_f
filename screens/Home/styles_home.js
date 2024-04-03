@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
         borderColor: 'lightgray',
         paddingHorizontal: 15,
         marginHorizontal: 10,
-        marginTop: 20,
-        height: 50, // Altura ajustada
+        marginTop: 10,
+        height: 50,
         width: '95%',
         backgroundColor: '#F1F2F3',
         shadowColor: '#E6E7E9',
@@ -59,16 +59,16 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     C_categorias: {
-        paddingVertical: 15,
+        paddingVertical: 7,
         alignItems: 'center',
         paddingHorizontal: 5,
-        marginBottom: 20, // Ajusta el margen inferior del ListCategories
+        marginBottom:0
     },
     categoryBtn: {
         height: 40,
         width: 117,
         marginRight: 7,
-        borderRadius: 30,
+        borderRadius: 10,
         alignItems: 'center',
         paddingHorizontal: 5,
         flexDirection: 'row',
@@ -81,17 +81,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    cardContainer: {
-        marginTop: 20, // Ajusta el margen superior del contenedor del Card
-    },
     card: {
         height: 240,
         width: cardWidth,
         marginHorizontal: 10,
-        marginBottom: '30%',
-        borderRadius: 15,
+        marginBottom: 20,
+        marginTop: 30,
+        borderRadius: 30,
         elevation: 13,
-        backgroundColor: 'white',
+        backgroundColor: '#FFDBC0',
     },
     addToCartBtn: {
         height: 30,
@@ -104,3 +102,4 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
+
