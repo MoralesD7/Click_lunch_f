@@ -1,21 +1,22 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  Cont_P: {
+  container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#F4F4F1',
   },
-  txt_registro: {
-    fontFamily: 'Poppins-Regular',
+  titleText: {
+    fontFamily: 'Abel-Regular',
+    color:"#EF6106",
     fontSize: 30,
     textAlign: 'center',
     marginVertical: 15,
   },
-  Cont_forms: {
-    marginHorizontal: 10,
-    backgroundColor: 'white',
+  formsContainer: {
+    marginHorizontal: '10%',
+    backgroundColor: '#F3F3F0',
     borderRadius: 20,
     width: '85%',
     padding: 20,
@@ -28,39 +29,15 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  cajatexto_usuario: {
-    paddingVertical: 15,
+  inputBox: {
+    paddingVertical: '5%',
     backgroundColor: '#cccccc50',
     fontFamily: 'MochiyPopOne-Regular',
     borderRadius: 30,
-    marginVertical: 10, 
+    marginVertical: '5%', 
     flexDirection: 'row'
   },
-  icon_user: {
-    marginRight: 10,
-    color: "#EF6106"
-  },
-  cajatexto_mail: {
-    paddingVertical: 15,
-    backgroundColor: '#cccccc50',
-    fontFamily: 'MochiyPopOne-Regular',
-    borderRadius: 30,
-    marginVertical: 10, 
-    flexDirection: 'row'
-  },
-  icon_mail: {
-    marginRight: 10,
-    color: "#EF6106"
-  },
-  cajatexto_password: {
-    paddingVertical: 15,
-    backgroundColor: '#cccccc50',
-    fontFamily: 'MochiyPopOne-Regular',
-    borderRadius: 30,
-    marginVertical: 10, 
-    flexDirection: 'row'
-  },
-  icon_lock: {
+  inputIcon: {
     marginRight: 10,
     color: "#EF6106"
   },
@@ -70,29 +47,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
   },
-  P_boton_registrar: {
+  registerButtonContainer: {
     alignItems: 'center',
     marginTop: 35,
     marginBottom: 35,
   },
-  cajaboton_registrar: {
+  registerButtonBox: {
     backgroundColor: '#EF6106',
     borderRadius: 30,
     paddingVertical: 15,
     width: 150,
-    },
-  txtboton: {
+  },
+  registerButtonText: {
     textAlign: 'center',
     color: 'white',
     fontFamily: 'MochiyPopOne-Regular',
   },
-  P_boton_iniciar_sesion: {
+  loginButtonContainer: {
     alignItems: 'center',
     marginTop: 20,
     marginVertical: 20
   },
-
-  cajaboton_iniciar_sesion: {
+  loginButtonBox: {
     paddingVertical: 15,
     width: 120,
     borderWidth: 0,
@@ -100,8 +76,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-
-  txt_iniciar: {
+  loginButtonText: {
     width: 150,
     fontFamily: 'Poppins-Regular',
     fontSize: 12,

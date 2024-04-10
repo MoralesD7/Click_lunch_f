@@ -4,18 +4,22 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-// Screens
+// importaciones de pantallas 
 import Home from '../screens/Home/Home';
 import Login from '../screens/Log/Login';
 import Register from '../screens/Registration/Register';
 import Profile from '../screens/Profile/Profile';
 import Trolley from '../screens/Trolley/Trolley';
 import Favorite from '../screens/Favorite/Favorite';
-import Details from '../screens/Home/Details'; // Importa la pantalla de detalles
+import Details from '../screens/Home/Details';
+import Information from '../screens/Information/Information';
 
+//hooks para la nav 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+
+//contenedor de la nav por stack 
 function MainNavigator() {
   return (
     <NavigationContainer>
@@ -28,7 +32,7 @@ function MainNavigator() {
     </NavigationContainer>
   );
 }
-
+//contenedor para la nav de la barra
 function TabNavigator() {
   return (
     <Tab.Navigator
@@ -49,7 +53,16 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Favorite" // Nombre de la nueva pestaña
+        name="Informacion"
+        component={Information}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="infocirlceo" size={size} color={color} /> // Corregir el nombre del icono
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Favoritos" // Nombre de la nueva pestaña
         component={Favorite} // Componente a renderizar
         options={{
           tabBarIcon: ({ color, size }) => (

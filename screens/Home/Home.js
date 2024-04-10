@@ -5,13 +5,13 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import categories from '../../consts/categories';
 import foods from '../../consts/foods';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native'; // Importa useNavigation
+import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
   const [searchText, setSearchText] = useState('');
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
-  const navigation = useNavigation(); // Obtiene el objeto de navegación
-
+  const navigation = useNavigation(); 
+  
   const ListCategories = () => {
     return (
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.C_categorias}>
@@ -30,12 +30,12 @@ const Home = () => {
               <View style={styles.categoryBtnImgCon}>
                 <Image
                   source={category.image}
-                  style={{ height: 35, width: 35, resizeMode: 'cover' }}
+                  style={{ height: 30, width: 30, resizeMode: 'cover' }}
                 />
               </View>
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 13,
                   fontWeight: 'bold',
                   marginLeft: 10,
                   color: selectedCategoryIndex === index ? '#FFF' : '#F9813A',
@@ -52,49 +52,31 @@ const Home = () => {
 
   const Card = ({ food }) => {
     return (
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Details', food)}>
+      <TouchableOpacity onPress={() => navigation.navigate('Details', food)}>
         <View style={styles.card}>
           <View style={{ alignItems: 'center', top: -30 }}>
-            <Image source={food.image} style={{ height: 120, width: 120 }} />
+            <Image source={food.image} style={{ height: 120, width: '100%' }} resizeMode="contain" />
           </View>
           <View style={{ marginHorizontal: 20 }}>
-            {/* Aquí envuelve el texto dentro de un componente Text */}
-            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{food.name}</Text>
-            <Text style={{ fontSize: 14, color: 'gray', marginTop: 2 }}>
-              {food.ingredients}
-            </Text>
-          </View>
-          <View
-            style={{
-              marginTop: 10,
-              marginHorizontal: 20,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-              ${food.price}
-            </Text>
-            <View style={styles.addToCartBtn}>
-              <AntDesign name="plus" size={20} color={'white'} />
+            <Text style={styles.foodName}>{food.name}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+              <Text style={styles.foodPrice}>${food.price}</Text>
+              <TouchableOpacity
+                style={styles.addToCartBtn}
+                onPress={() => {/* Lógica de agregar al carrito */}}
+              >
+                <AntDesign name="plus" size={20} color={'white'} />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
       </TouchableOpacity>
     );
   };
-  
+
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={styles.Cont_P}>
-        <View style={styles.header}>
-          <View>
-            <View style={styles.contenedor_txt1}>
-              <Text style={styles.txt_b}>¡¡Bienvenido!!</Text>
-            </View>
-            <Text style={styles.txt_b__2}>¿Qué deseas hoy?</Text>
-          </View>
-        </View>
         <View style={styles.Buscador_c}>
           <AntDesign name="search1" size={20} color="gray" style={styles.Icon_busqueda} />
           <TextInput
@@ -108,10 +90,8 @@ const Home = () => {
           <ListCategories />
         </View>
       </View>
-      <ScrollView
-        showsVerticalScrollIndicator={true}
-        contentContainerStyle={{ minHeight: '100%' }}>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+      <ScrollView showsVerticalScrollIndicator={true}>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
           {foods.map((item, index) => (
             <Card key={index} food={item} />
           ))}

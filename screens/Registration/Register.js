@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
-import styles from "../Registration/styles_register";
+import registerStyles from "../Registration/styles_register";
 import { useFonts } from 'expo-font';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Register() {
-    // hook para las fuentes 
+    // Hook para las fuentes 
     const [fontsLoaded] = useFonts({
         'Abel-Regular': require('../../assets/fonts/Abel-Regular.ttf'),
         'MochiyPopOne-Regular': require('../../assets/fonts/MochiyPopOne-Regular.ttf')
@@ -14,7 +14,7 @@ export default function Register() {
     if (!fontsLoaded) {
         return null;
     }
-    //cambiar entre pantallas 
+    // Hooks para la navegación  
     const navigation = useNavigation();
 
     const goToHomeScreen = () => {
@@ -24,57 +24,57 @@ export default function Register() {
     const goToLoginScreen = () => {
         navigation.navigate('Login');
     };
-    //componente principal 
+    // Componente principal 
     return (
-        <View style={styles.Cont_P}>
+        <View style={registerStyles.container}>
 
-            <View style={styles}>
-                <Text style={styles.txt_registro}>Registrar</Text>
+            <View style={registerStyles.titleContainer}>
+                <Text style={registerStyles.titleText}>Registrar</Text>
             </View>
 
-            <View style={styles.Cont_forms}>
+            <View style={registerStyles.formsContainer}>
 
-                <View style={styles.cajatexto_usuario}>
+                <View style={registerStyles.inputBox}>
                     <TextInput
                         placeholder="Usuario"
-                        style={styles.inputText} />
-                    <AntDesign name="user" size={25} color="black" style={styles.icon_user} />
+                        style={registerStyles.inputText} />
+                    <AntDesign name="user" size={25} color="black" style={registerStyles.inputIcon} />
                 </View>
 
-                <View style={styles.cajatexto_mail}>
+                <View style={registerStyles.inputBox}>
                     <TextInput
                         placeholder="Correo"
-                        style={styles.inputText} />
-                    <AntDesign name="mail" size={25} color="black" style={styles.icon_lock} />
+                        style={registerStyles.inputText} />
+                    <AntDesign name="mail" size={25} color="black" style={registerStyles.inputIcon} />
                 </View>
 
-                <View style={styles.cajatexto_password}>
+                <View style={registerStyles.inputBox}>
                     <TextInput
                         placeholder="Contraseña"
                         secureTextEntry={true}
-                        style={styles.inputText} />
-                    <AntDesign name="lock" size={25} color="black" style={styles.icon_lock} />
+                        style={registerStyles.inputText} />
+                    <AntDesign name="lock" size={25} color="black" style={registerStyles.inputIcon} />
                 </View>
 
-                <View style={styles.cajatexto_password}>
+                <View style={registerStyles.inputBox}>
                     <TextInput
                         placeholder="Confirmar contraseña "
                         secureTextEntry={true}
-                        style={styles.inputText} />
-                    <AntDesign name="lock" size={25} color="black" style={styles.icon_lock} />
+                        style={registerStyles.inputText} />
+                    <AntDesign name="lock" size={25} color="black" style={registerStyles.inputIcon} />
                 </View>
 
-                <View style={styles.P_boton_registrar}>
-                    <TouchableOpacity style={styles.cajaboton_registrar} onPress={goToHomeScreen}>
-                        <Text style={styles.txtboton}>Registrar</Text>
+                <View style={registerStyles.registerButtonContainer}>
+                    <TouchableOpacity style={registerStyles.registerButtonBox} onPress={goToHomeScreen}>
+                        <Text style={registerStyles.registerButtonText}>Registrar</Text>
                     </TouchableOpacity>
                 </View>
 
             </View>
 
-            <View style={styles.P_boton_iniciar_sesion}>
-                <TouchableOpacity style={styles.cajaboton_iniciar_sesion} onPress={goToLoginScreen}>
-                    <Text style={styles.txt_iniciar}>¿Ya tienes una cuenta? inicia sesíon</Text>
+            <View style={registerStyles.loginButtonContainer}>
+                <TouchableOpacity style={registerStyles.loginButtonBox} onPress={goToLoginScreen}>
+                    <Text style={registerStyles.loginButtonText}>¿Ya tienes una cuenta? Inicia sesión</Text>
                 </TouchableOpacity>
             </View>
 

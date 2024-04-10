@@ -5,7 +5,7 @@ const cardWidth = width / 2 - 20;
 
 const styles = StyleSheet.create({
     Cont_p: {
-        flex: 1,
+        flex:1,
         backgroundColor: 'white',
     },
     content: {
@@ -13,13 +13,10 @@ const styles = StyleSheet.create({
         paddingTop: 15,
     },
     header: {
-        marginTop: 20,
+        marginTop: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: 20,
-    },
-    contenedor_txt1: {
-        flexDirection: 'row',
+        paddingHorizontal: 5,
     },
     txt_b: {
         fontFamily: 'Poppins-Regular',
@@ -36,11 +33,11 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderWidth: 1,
         borderColor: 'lightgray',
-        paddingHorizontal: 15,
-        marginHorizontal: 10,
-        marginTop: 10,
+        paddingHorizontal: 25,
+        marginHorizontal: 20,
+        marginTop: 20,
         height: 50,
-        width: '95%',
+        width: '90%',
         backgroundColor: '#F1F2F3',
         shadowColor: '#E6E7E9',
         shadowOffset: {
@@ -58,15 +55,25 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 16,
     },
+      txt_inicio: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 30,
+        textAlign: 'center',
+        marginVertical: 5,
+        textDecorationLine: 'underline',
+        borderBottomWidth: 1,
+        borderBottomColor: '#EF6106',
+      },
     C_categorias: {
-        paddingVertical: 7,
+        width:'%100',
+        paddingVertical: 10,
         alignItems: 'center',
         paddingHorizontal: 5,
         marginBottom:0
     },
     categoryBtn: {
         height: 40,
-        width: 117,
+        width: '%70',
         marginRight: 7,
         borderRadius: 10,
         alignItems: 'center',
@@ -82,24 +89,33 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     card: {
-        height: 240,
+        height: '%100',
         width: cardWidth,
         marginHorizontal: 10,
         marginBottom: 20,
         marginTop: 30,
         borderRadius: 30,
         elevation: 13,
-        backgroundColor: '#FFDBC0',
+        backgroundColor: '#FED8CF',
+    },
+    
+    foodName: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 5,
     },
     addToCartBtn: {
-        height: 30,
-        width: 30,
-        borderRadius: 20,
         backgroundColor: '#F9813A',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+        borderRadius: 20,
+        padding: 7,
+        marginBottom:10
+      },
+    
+      foodPrice: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom:10
+      },
 });
 
 export default styles;
-

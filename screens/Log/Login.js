@@ -1,13 +1,9 @@
 import React from "react";
 import { Text, View, Image, TextInput, TouchableOpacity } from "react-native";
-import styles from "../Log/styles_login";
+import loginStyles from "../Log/styles_login";
 import { useFonts } from 'expo-font';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
-
-
-
-
 
 export default function Login() {
   // hook para las fuentes 
@@ -22,7 +18,7 @@ export default function Login() {
     return null;
   }
 
-  //cambiar entre pantallas 
+  //hooks para la nav  
   const navigation = useNavigation();
 
   const goToHomeScreen = () => {
@@ -32,44 +28,48 @@ export default function Login() {
   const goToRegisterScreen = () => {
     navigation.navigate('Register');
   };
-
+  //componente principal 
   return (
-    <View style={styles.Cont_P}>
+    <View style={loginStyles.container}>
 
-      <View style={styles.IconContainer}>
-        <Image source={require('../../assets/images/Icon_login.png')} style={styles.Icon_login} />
+      <View style={loginStyles.titleContainer}>
+        <Text style={loginStyles.titleText}>Click lunch</Text>
       </View>
 
-      <View style={styles}>
-        <Text style={styles.txt_inicio}>Inicio de sesión</Text>
+      <View style={loginStyles.iconContainer}>
+        <Image source={require('../../assets/images/Icon_login.png')} style={loginStyles.loginIcon} />
       </View>
 
-      <View style={styles.Cont_forms}>
+      <View style={loginStyles.sectionTitleContainer}>
+        <Text style={loginStyles.sectionTitleText}>Inicio de sesión</Text>
+      </View>
 
-        <View style={styles.cajatexto_mail}>
+      <View style={loginStyles.formsContainer}>
+
+        <View style={loginStyles.inputBox}>
           <TextInput
             placeholder="Correo@gmail.com"
-            style={styles.inputText} />
-          <AntDesign name="mail" size={25} color="black" style={styles.icon_mail} />
+            style={loginStyles.inputText} />
+          <AntDesign name="mail" size={25} color="black" style={loginStyles.inputIcon} />
         </View>
 
-        <View style={styles.cajatexto_password}>
+        <View style={loginStyles.inputBox}>
           <TextInput
             placeholder="Password"
             secureTextEntry={true}
-            style={styles.inputText} />
-          <AntDesign name="lock" size={25} color="black" style={styles.icon_lock} />
+            style={loginStyles.inputText} />
+          <AntDesign name="lock" size={25} color="black" style={loginStyles.inputIcon} />
         </View>
 
-        <View style={styles.P_boton_iniciar_seción}>
-          <TouchableOpacity style={styles.cajaboton_iniciar_seción} onPress={goToHomeScreen}>
-            <Text style={styles.txtboton}>Iniciar sesión</Text>
+        <View style={loginStyles.loginButtonContainer}>
+          <TouchableOpacity style={loginStyles.loginButtonBox} onPress={goToHomeScreen}>
+            <Text style={loginStyles.loginButtonText}>Iniciar sesión</Text>
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.P_boton_registrar}>
-        <TouchableOpacity style={styles.cajaboton_registrar} onPress={goToRegisterScreen}>
-          <Text style={styles.txt_registrar}>¿No tienes una cuenta aun? Registrate</Text>
+      <View style={loginStyles.registerButtonContainer}>
+        <TouchableOpacity style={loginStyles.registerButtonBox} onPress={goToRegisterScreen}>
+          <Text style={loginStyles.registerButtonText}>¿No tienes una cuenta aun? Registrate</Text>
         </TouchableOpacity>
       </View>
     </View>
