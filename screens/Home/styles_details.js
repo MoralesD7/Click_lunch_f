@@ -11,17 +11,34 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 280,
-    marginBottom: 20,
+    marginBottom: 40, // Ajusta el margen inferior para crear más separación
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2, // Reducir la altura de la sombra
+    },
+    shadowOpacity: 0.3, // Reducir la opacidad de la sombra
+    shadowRadius: 2, // Reducir el radio de la sombra
+    elevation: 5,
+  },
+  imageBorder: {
+    borderWidth: 5, // Ajusta el ancho del borde
+    borderColor: '#FAB97B', // Cambia el color del borde
+    borderRadius: 25, // Ajusta el radio del borde para esquinas redondeadas
+    overflow: 'hidden',
+    padding: 30, // Añade un espacio entre la imagen y el borde
   },
   image: {
-    height: 220,
-    width: 220,
+    height: 200,
+    width: 200,
+    resizeMode: 'cover',
+    borderRadius: 10, // Ajusta el radio de la imagen para esquinas redondeadas
   },
   details: {
     backgroundColor: '#F9813A',
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
-    paddingBottom: 100, // Ajuste del espacio para el botón
+    paddingBottom: 100,
   },
   detailsHeader: {
     flexDirection: 'row',
@@ -46,7 +63,7 @@ const styles = StyleSheet.create({
   },
   detailsInfo: {
     paddingHorizontal: 20,
-    marginBottom: 40, // Ajuste de espacio entre precio y botón
+    marginBottom: 40,
   },
   detailsRow: {
     borderBottomWidth: 1,
@@ -59,7 +76,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   addToCartBtn: {
-    flexDirection:'row',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
@@ -76,7 +93,7 @@ const styles = StyleSheet.create({
     right: 100,
     backgroundColor: 'transparent',
     justifyContent: 'center',
-    alignItems:'center',
+    alignItems: 'center',
     width: 50,
     height: 50,
   },

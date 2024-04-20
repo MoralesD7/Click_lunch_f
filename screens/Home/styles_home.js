@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
         borderRadius: 30,
         elevation: 13,
-        backgroundColor: '#FED8CF',
+        backgroundColor: '#FFDBC0',
     },
     
     foodName: {

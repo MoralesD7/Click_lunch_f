@@ -1,4 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
@@ -12,37 +15,33 @@ const styles = StyleSheet.create({
   },
   titleText:{
     color:"#EF6106",
-    alignItems:'center',
-    justifyContent:'center',
     fontFamily: 'Abel-Regular',
-    marginTop:'10%',
-    fontSize: 30,
+    marginTop: windowHeight * 0.1,
+    fontSize: windowWidth * 0.08,
     textAlign: 'center',
     marginVertical: 1,
   },
   loginIcon: {
-    width: 150,
-    height: 150,
-    borderRadius: 25,
+    width: windowWidth * 0.5,
+    height: windowWidth * 0.5,
+    borderRadius: windowWidth * 0.08,
     borderColor: 'white',
   },
   sectionTitleText: {
-    color:"#EF6106",
-    alignItems:'center',
-    justifyContent:'center',
-    fontFamily: 'Abel-Regular',
-    fontSize: 30,
+    color:"#FF6100",
+    fontFamily: 'MochiyPopOne-Regular',
+    fontSize: windowWidth * 0.08,
     textAlign: 'center',
-    marginVertical: 10,
+    marginVertical: windowHeight * 0.02,
   },
   formsContainer: {
     alignItems:'center',
     justifyContent:'center',
-    margin: 10,
+    margin: windowWidth * 0.03,
     backgroundColor: '#F3F3F0',
-    borderRadius: 20,
+    borderRadius: windowWidth * 0.05,
     width: '85%',
-    padding: 20,
+    padding: windowWidth * 0.05,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -55,32 +54,32 @@ const styles = StyleSheet.create({
   inputBox: {
     alignItems:'center',
     justifyContent:'center',
-    paddingVertical: 15,
+    paddingVertical: windowWidth * 0.04,
     backgroundColor: '#cccccc50',
     fontFamily: 'MochiyPopOne-Regular',
-    borderRadius: 30,
-    marginVertical: 15,
+    borderRadius: windowWidth * 0.08,
+    marginVertical: windowWidth * 0.03,
     flexDirection: 'row'
   },
   inputIcon: {
-    marginRight: 10,
+    marginRight: windowWidth * 0.05,
     color: "#EF6106"
   },
   inputText: {
-    paddingHorizontal: 15,
+    paddingHorizontal: windowWidth * 0.05,
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
   },
   loginButtonContainer: {
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: windowHeight * 0.015, // Ajustamos el margen vertical
   },
   loginButtonBox: {
     backgroundColor: '#EF6106',
-    borderRadius: 30,
-    paddingVertical: 15,
-    width: 150,
+    borderRadius: windowWidth * 0.08,
+    paddingVertical: windowWidth * 0.05,
+    width: windowWidth * 0.35,
   },
   loginButtonText: {
     textAlign: 'center',
@@ -89,13 +88,13 @@ const styles = StyleSheet.create({
   },
   registerButtonContainer: {
     alignItems: 'center',
-    marginTop: 20,
-    marginVertical: 20
+    marginTop: windowHeight * 0.01,
+    marginVertical: windowHeight * .01 // Reducimos la distancia aquí
   },
 
   registerButtonBox: {
-    paddingVertical: 15,
-    width: 120,
+    paddingVertical: windowWidth * 0.001,
+    width: windowWidth * 0.28,
     borderWidth: 0,
     backgroundColor: 'transparent',
     flexDirection: 'row',
@@ -103,11 +102,9 @@ const styles = StyleSheet.create({
   },
 
   registerButtonText: {
-    alignItems:'center',
-    justifyContent:'center',
-    width: '170%',
+    width: '200%',
     fontFamily: 'Poppins-Regular',
-    fontSize: 13,
+    fontSize: windowWidth * 0.030,
     textAlign: 'center',
     textDecorationLine: 'underline',
   },

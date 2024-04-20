@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -17,9 +16,11 @@ const Details = ({ navigation, route }) => {
           <AntDesign name="left" size={30} onPress={navigation.goBack} />
           <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Details</Text>
         </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}>
           <View style={styles.imageContainer}>
-            <Image source={item.image} style={styles.image} />
+            <View style={styles.imageBorder}>
+              <Image source={item.image} style={styles.image} />
+            </View>
           </View>
           <View style={styles.details}>
             <View style={styles.detailsHeader}>

@@ -8,11 +8,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#F4F4F1',
   },
   titleText: {
-    fontFamily: 'Abel-Regular',
+    fontFamily: 'MochiyPopOne-Regular',
     color:"#EF6106",
     fontSize: 30,
     textAlign: 'center',
-    marginVertical: 15,
+    marginVertical: 25,
   },
   formsContainer: {
     marginHorizontal: '10%',
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   registerButtonBox: {
     backgroundColor: '#EF6106',
     borderRadius: 30,
-    paddingVertical: 15,
+    paddingVertical: 13,
     width: 150,
   },
   registerButtonText: {

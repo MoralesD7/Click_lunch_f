@@ -11,12 +11,7 @@ export default function Login() {
     'Abel-Regular': require('../../assets/fonts/Abel-Regular.ttf'),
     'MochiyPopOne-Regular': require('../../assets/fonts/MochiyPopOne-Regular.ttf'),
     'Poppins-Regular': require('../../assets/fonts/Poppins-Regular.ttf')
-
   });
-
-  if (!fontsLoaded) {
-    return null;
-  }
 
   //hooks para la nav  
   const navigation = useNavigation();
@@ -24,28 +19,33 @@ export default function Login() {
   const goToHomeScreen = () => {
     navigation.navigate('Home');
   };
+  
 
   const goToRegisterScreen = () => {
     navigation.navigate('Register');
   };
+
+  const gotoInformationScreen = () => {
+    navigation.navigate('Information_login')
+  };
+
+  // Verificar si las fuentes están cargadas antes de renderizar el componente
+  if (!fontsLoaded) {
+    return null;
+  }
+
   //componente principal 
   return (
     <View style={loginStyles.container}>
-
-      <View style={loginStyles.titleContainer}>
-        <Text style={loginStyles.titleText}>Click lunch</Text>
-      </View>
-
       <View style={loginStyles.iconContainer}>
         <Image source={require('../../assets/images/Icon_login.png')} style={loginStyles.loginIcon} />
       </View>
 
       <View style={loginStyles.sectionTitleContainer}>
-        <Text style={loginStyles.sectionTitleText}>Inicio de sesión</Text>
+        <Text style={loginStyles.sectionTitleText}>¡Bienvenido!</Text>
       </View>
 
       <View style={loginStyles.formsContainer}>
-
         <View style={loginStyles.inputBox}>
           <TextInput
             placeholder="Correo@gmail.com"
@@ -67,9 +67,16 @@ export default function Login() {
           </TouchableOpacity>
         </View>
       </View>
+
       <View style={loginStyles.registerButtonContainer}>
         <TouchableOpacity style={loginStyles.registerButtonBox} onPress={goToRegisterScreen}>
           <Text style={loginStyles.registerButtonText}>¿No tienes una cuenta aun? Registrate</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={loginStyles.registerButtonContainer}>
+        <TouchableOpacity style={loginStyles.registerButtonBox} onPress={gotoInformationScreen}>
+          <Text style={loginStyles.registerButtonText}>Más informacion</Text>
         </TouchableOpacity>
       </View>
     </View>
