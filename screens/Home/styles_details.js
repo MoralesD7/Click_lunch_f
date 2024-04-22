@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 280,
-    marginBottom: 40, // Ajusta el margen inferior para crear más separación
+    marginBottom: 30, // Ajusta el margen inferior para crear más separación
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     height: 200,
     width: 200,
     resizeMode: 'cover',
-    borderRadius: 10, // Ajusta el radio de la imagen para esquinas redondeadas
+    borderRadius: 10,
+    // Ajusta el radio de la imagen para esquinas redondeadas
   },
   details: {
     backgroundColor: '#F9813A',
