@@ -1,21 +1,36 @@
-import React, { createContext, useState } from "react";
+// DataContext.js
+import React, { createContext, useContext, useState } from "react";
 
 const DataContext = createContext();
 
-const DataProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-
-  const buyProducts = (product) => {
-    const productRepeat = cart.find((item) => item.id === product.id);
-
-    if (productRepeat) {
-      setCart(cart.map((item) => (item.id === product.id ? { ...product, quantity: productRepeat.quantity + 1 } : item)));
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
-  };
-
-  return <DataContext.Provider value={{ cart, setCart, buyProducts }}>{children}</DataContext.Provider>;
+const useDataContext = () => {
+  const context = useContext(DataContext);
+  if (!context) {
+    throw new Error("useDataContext must be used within a DataContext.Provider");
+  }
+  return context;
 };
 
-export { DataContext, DataProvider };
+const DataContextProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
+  const removeFromCart = (productId) => {
+    setCart(cart.filter(item => item.id !== productId));
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  return (
+    <DataContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+      {children}
+    </DataContext.Provider>
+  );
+};
+
+export { DataContext, useDataContext, DataContextProvider };

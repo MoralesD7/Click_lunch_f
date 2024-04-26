@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     card: {
         height: '%100',
         width: cardWidth,
-        marginHorizontal: 10,
+        marginHorizontal: 7,
         marginBottom: 20,
         marginTop: 30,
         borderRadius: 30,
@@ -115,6 +115,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom:10
+      },
+      titleText: {
+        fontFamily: 'MochiyPopOne-Regular',
+        color:"#FE3A2E",
+        fontSize: 20,
+        textAlign: 'center',
+        marginVertical: 5,
       },
 });
 

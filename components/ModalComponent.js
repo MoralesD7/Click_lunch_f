@@ -1,30 +1,61 @@
-import React, {useState} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
+// ModalComponent.js
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Modal, Pressable, FlatList } from 'react-native';
+import { useDataContext } from './DataContext';
 
 const ModalComponent = () => {
+  const { cart, clearCart } = useDataContext();
   const [modalVisible, setModalVisible] = useState(false);
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const handleClearCart = () => {
+    clearCart();
+    closeModal();
+  };
+
   return (
     <View style={styles.centeredView}>
-     <Pressable
-        style={[styles.button]}
-        onPress={() => setModalVisible(true)}>
+      <Pressable
+        style={styles.button}
+        onPress={() => setModalVisible(true)}
+      >
         <Text style={styles.textStyle}>🛒</Text>
       </Pressable>
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
+        onRequestClose={closeModal}
+      >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>Carrito de Compras</Text>
+            <FlatList
+              data={cart}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <View style={styles.item}>
+                  <Text>{item.name}</Text>
+                  <Pressable onPress={() => removeFromCart(item.id)}>
+                    <Text style={styles.removeItemText}>Eliminar</Text>
+                  </Pressable>
+                </View>
+              )}
+            />
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>❌</Text>
+              onPress={handleClearCart}
+            >
+              <Text style={styles.textStyle}>Limpiar Carrito</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={closeModal}
+            >
+              <Text style={styles.textStyle}>Cerrar</Text>
             </Pressable>
           </View>
         </View>
@@ -60,11 +91,9 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
   buttonClose: {
     backgroundColor: '#2196F3',
+    marginTop: 20,
   },
   textStyle: {
     color: 'white',
@@ -74,6 +103,17 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 10,
+  },
+  removeItemText: {
+    color: 'red',
   },
 });
 

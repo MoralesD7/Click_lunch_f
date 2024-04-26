@@ -1,11 +1,12 @@
 const categories = [
-  { id: '1', name: 'Pizzas', image: require('../assets/images/catergories/pizza.png') },
-  { id: '2', name: 'Hamburguesas', image: require('../assets/images/catergories/burger.png') },
-  { id: '3', name: 'Sushi', image: require('../assets/images/catergories/sushi.png') },
-  { id: '4', name: 'Ensaladas', image: require('../assets/images/catergories/salad.png') },
-  { id: '5', name: 'Tacos', image: require('../assets/images/catergories/tacos.png') },
-  { id: '6', name: 'Pastas', image: require('../assets/images/catergories/pasta.png') },
-  { id: '7', name: 'Carnes', image: require('../assets/images/catergories/parrillada.png') },
+  { id: '1', name: 'Todo', image: require('../assets/images/catergories/buffet.png') },
+  { id: '2', name: 'Pizza', image: require('../assets/images/catergories/pizza.png') },
+  { id: '3', name: 'Hamburguesa', image: require('../assets/images/catergories/burger.png') },
+  { id: '4', name: 'Sushi', image: require('../assets/images/catergories/sushi.png') },
+  { id: '5', name: 'Ensalada', image: require('../assets/images/catergories/salad.png') },
+  { id: '6', name: 'Tacos', image: require('../assets/images/catergories/tacos.png') },
+  { id: '7', name: 'Pasta', image: require('../assets/images/catergories/pasta.png') },
+  { id: '8', name: 'Carnes', image: require('../assets/images/catergories/parrillada.png') },
 ];
 
 export default categories;
