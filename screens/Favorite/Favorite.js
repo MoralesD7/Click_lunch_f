@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import foods from '../../consts/foods';

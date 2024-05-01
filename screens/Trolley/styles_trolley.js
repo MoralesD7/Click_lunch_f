@@ -41,19 +41,26 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   quantityContainer: {
-    marginRight: 20,
+    marginRight: 10,
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between', // Alinea los botones de incrementar y decrementar
   },
   quantity: {
     fontWeight: 'bold',
     fontSize: 18,
+    marginBottom: 20,
+    marginHorizontal: 5, // Añade un margen horizontal para separar la cantidad del botón de eliminar
   },
   actionBtnContainer: {
-    width:50,
+    width: 70,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 15,
-    marginBottom:25
+  },
+  deleteButton: {
+    marginLeft: 'auto',
+    marginHorizontal:10,
   },
 });
 
