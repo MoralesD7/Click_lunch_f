@@ -1,5 +1,6 @@
+
 const categories = [
-  { id: '1', name: 'Todo', image: require('../assets/images/catergories/buffet.png') },
+  { id: '1', name: 'Todo', image: require('../assets/images/catergories/todo.png') },
   { id: '2', name: 'Pizza', image: require('../assets/images/catergories/pizza.png') },
   { id: '3', name: 'Hamburguesa', image: require('../assets/images/catergories/burger.png') },
   { id: '4', name: 'Sushi', image: require('../assets/images/catergories/sushi.png') },

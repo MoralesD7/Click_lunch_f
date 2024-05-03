@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import * as Animatable from 'react-native-animatable';
 
 // importaciones de pantallas 
 import Home from '../screens/Home/Home';
@@ -15,10 +15,10 @@ import Favorite from '../screens/Favorite/Favorite';
 import Details from '../screens/Home/Details';
 import Information from '../screens/Information/Information';
 import Information_login from '../screens/Information_log/information_login';
+
 //hooks para la nav 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
 
 //contenedor de la nav por stack 
 function MainNavigator() {
@@ -34,6 +34,7 @@ function MainNavigator() {
     </NavigationContainer>
   );
 }
+
 //contenedor para la nav de la barra
 function TabNavigator() {
   return (
@@ -49,8 +50,15 @@ function TabNavigator() {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="home" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Animatable.View 
+              animation={focused ? 'pulse' : null} // Animación de resaltado al seleccionar
+              easing="ease-out" // Tipo de transición
+              iterationCount="infinite" // Número de veces que se repite la animación (en este caso, infinito)
+              style={{ transform: [{ scale: focused ? 1.2 : 1 }] }} // Escalado del icono
+            >
+              <AntDesign name="home" size={size} color={color} />
+            </Animatable.View>
           ),
         }}
       />
@@ -58,17 +66,15 @@ function TabNavigator() {
         name="Informacion"
         component={Information}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="infocirlceo" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Favoritos" 
-        component={Favorite} 
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="hearto" size={size} color={color} /> 
+          tabBarIcon: ({ color, size, focused }) => (
+            <Animatable.View 
+              animation={focused ? 'pulse' : null}
+              easing="ease-out"
+              iterationCount="infinite"
+              style={{ transform: [{ scale: focused ? 1.2 : 1 }] }}
+            >
+              <AntDesign name="infocirlceo" size={size} color={color} />
+            </Animatable.View>
           ),
         }}
       />
@@ -76,8 +82,15 @@ function TabNavigator() {
         name="Carrito"
         component={Trolley}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="shoppingcart" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Animatable.View 
+              animation={focused ? 'pulse' : null}
+              easing="ease-out"
+              iterationCount="infinite"
+              style={{ transform: [{ scale: focused ? 1.2 : 1 }] }}
+            >
+              <AntDesign name="shoppingcart" size={size} color={color} />
+            </Animatable.View>
           ),
         }}
       />
@@ -85,8 +98,15 @@ function TabNavigator() {
         name="Perfil"
         component={Profile}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="user" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Animatable.View 
+              animation={focused ? 'pulse' : null}
+              easing="ease-out"
+              iterationCount="infinite"
+              style={{ transform: [{ scale: focused ? 1.2 : 1 }] }}
+            >
+              <AntDesign name="user" size={size} color={color} />
+            </Animatable.View>
           ),
         }}
       />

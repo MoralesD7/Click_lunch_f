@@ -63,6 +63,42 @@ const foods = [
     preparationTime: '40 minutos', // Tiempo de preparación agregado
     image: require('../assets/images/parrillada_mixta.png'),
   },
+  {
+    id: '9',
+    category: 'Bebidas',
+    name: 'Coca-Cola',
+    description: 'Refresco de cola',
+    price: '2.50',
+    preparationTime: '0 minutos', // No requiere preparación
+    image: require('../assets/images/cocaCola.png'),
+  },
+  {
+    id: '10',
+    category: 'Bebidas',
+    name: 'Jugo de Naranja',
+    description: 'Jugo natural de naranja',
+    price: '3.00',
+    preparationTime: '0 minutos',
+    image: require('../assets/images/orangeJuice.png'),
+  },
+  {
+    id: '11',
+    category: 'Refrescos',
+    name: 'Sprite',
+    description: 'Refresco de lima-limón',
+    price: '2.50',
+    preparationTime: '0 minutos',
+    image: require('../assets/images/sprite.png'),
+  },
+  {
+    id: '12',
+    category: 'Refrescos',
+    name: 'Fanta',
+    description: 'Refresco de naranja',
+    price: '2.50',
+    preparationTime: '0 minutos',
+    image: require('../assets/images/fanta.png'),
+  },
 ];
 
 export default foods;
