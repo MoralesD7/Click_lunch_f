@@ -1,72 +1,81 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const FavoriteStyles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
     backgroundColor: '#f5f5f5',
-    paddingTop: 20,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#',
-    borderBottomWidth: 3,
-    borderBottomColor: '#ddd',
-    paddingBottom: 10,
-    marginBottom: 20,
-    marginTop: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+    backgroundColor: '#fff',
+    elevation: 3,
   },
-  title: {
+  headerText: {
     fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'center',
-    flex: 1,
-   },
-  favoriteList: {
-    paddingHorizontal: 20,
-    marginBottom: 10,
+    marginLeft: 10,
+    color: '#333',
   },
-  favoriteContainer: {
-    marginBottom: 10,
-    borderRadius: 20,
+  flatListContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+  },
+  cartContainer: {
+    marginBottom: 15,
+    borderRadius: 10,
     overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: 'red',
+    elevation: 2,
+    backgroundColor: '#fff',
   },
-  favoriteCard: {
+  cartCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 20,
+    padding: 15,
   },
   image: {
-    height: 70,
-    width: 70,
-    borderRadius: 10,
-    marginRight: 10,
+    width: 100,
+    height: 100,
+    resizeMode: 'cover',
+    borderRadius: 5,
+    marginRight: 15,
   },
   details: {
     flex: 1,
   },
   name: {
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 5,
+    color: '#333',
   },
   ingredients: {
     fontSize: 14,
-    color: 'grey',
+    color: '#666',
+    marginTop: 5,
   },
-  favoriteButton: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    backgroundColor: 'transparent',
-    padding: 20,
-    borderRadius: 50,
+  price: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 10,
+    color: '#e91e63',
+  },
+  deleteIcon: {
+    marginLeft: 'auto',
+  },
+  deleteIconContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    padding: 10,
+  },
+  deleteIconWrapper: {
+    backgroundColor: '#e91e63',
+    borderRadius: 20,
+    padding: 8,
   },
 });
 
-export default styles;
+export default FavoriteStyles;

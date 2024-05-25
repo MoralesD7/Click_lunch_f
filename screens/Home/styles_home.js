@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        paddingTop: 15,
+        paddingTop: 20,
     },
     header: {
         marginTop: 10,
@@ -90,31 +90,31 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     card: {
-        height: '%100',
+        height: 200, // Modificado el valor de altura
         width: cardWidth,
         marginHorizontal: 7,
         marginBottom: 20,
         marginTop: 30,
         borderRadius: 30,
         elevation: 13,
-        backgroundColor: '#FFDBC0',
+        borderColor: '#F9813A',
+        borderWidth: 2,
     },
-    
     foodName: {
         fontSize: 18,
-        fontWeight: 'bold',
         marginBottom: 5,
+        fontFamily: 'Abel-Regular',
+        textAlign: 'center', // Añadido el estilo de texto centrado
+    },
+    foodPrice: {
+        fontSize: 18,
+        marginBottom: 10,
+        textAlign: 'center', // Añadido el estilo de texto centrado
     },
     addToCartBtn: {
         backgroundColor: '#F9813A',
         borderRadius: 20,
         padding: 7,
-        marginBottom:10
-      },
-    
-      foodPrice: {
-        fontSize: 18,
-        fontWeight: 'bold',
         marginBottom:10
       },
       titleText: {

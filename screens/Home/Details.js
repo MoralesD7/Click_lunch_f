@@ -71,11 +71,6 @@ const Details = ({ navigation, route }) => {
             </Modal>
             <View style={styles.detailsHeader}>
               <Text style={styles.detailsTitle}>{item.name}</Text>
-              <TouchableOpacity onPress={() => {}}>
-                <View style={styles.iconContainer}>
-                  <AntDesign name="hearto" size={28} />
-                </View>
-              </TouchableOpacity>
             </View>
             <View style={styles.detailsInfo}>
               <View style={styles.detailsRow}>

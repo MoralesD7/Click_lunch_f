@@ -174,7 +174,7 @@ const Trolley = () => {
       <View style={styles.container}>
         <View style={styles.header}>
           <AntDesign name="left" size={30} onPress={navigation.goBack} />
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>Cart</Text>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>Carrito</Text>
         </View>
         <FlatList
           showsVerticalScrollIndicator={false}

@@ -27,6 +27,7 @@ function MainNavigator() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Information_login" component={Information_login} />
+        <Stack.Screen name="Favorite" component={Favorite} />
         <Stack.Screen name="Home" component={TabNavigator} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Details" component={Details} />
@@ -74,6 +75,22 @@ function TabNavigator() {
               style={{ transform: [{ scale: focused ? 1.2 : 1 }] }}
             >
               <AntDesign name="infocirlceo" size={size} color={color} />
+            </Animatable.View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Favoritos"
+        component={Favorite}
+        options={{
+          tabBarIcon: ({ color, size, focused }) => (
+            <Animatable.View 
+              animation={focused ? 'pulse' : null}
+              easing="ease-out"
+              iterationCount="infinite"
+              style={{ transform: [{ scale: focused ? 1.2 : 1 }] }}
+            >
+              <AntDesign name="hearto" size={size} color={color} />
             </Animatable.View>
           ),
         }}

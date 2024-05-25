@@ -1,41 +1,49 @@
-// Favorite.js
-
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
-import styles from '../Trolley/styles_trolley';
+import * as Animatable from 'react-native-animatable'; // Importa la biblioteca de animaciones
+import FavoriteStyles from "../Favorite/styles_favorite";
 
 const Favorite = () => {
-  const [favoritos, setFavoritos] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const navigation = useNavigation();
   const isFocusedFavorite = useIsFocused();
 
   useEffect(() => {
-    const obtenerFavoritos = async () => {
+    const loadFavorites = async () => {
       try {
-        const keys = await AsyncStorage.getAllKeys();
-        const resultados = await AsyncStorage.multiGet(keys);
-        const favoritos = resultados.map(([key, value]) => {
-          return JSON.parse(value);
-        });
-        setFavoritos(favoritos);
+        const favoritesString = await AsyncStorage.getItem('favorites');
+        if (favoritesString) {
+          const favoritesData = JSON.parse(favoritesString);
+          setFavorites(favoritesData);
+        }
       } catch (error) {
-        console.error('Error al obtener los favoritos:', error);
+        console.error('Error al cargar favoritos:', error);
       }
     };
-    obtenerFavoritos();
+    loadFavorites();
   }, [isFocusedFavorite]);
 
-  const eliminarObjeto = async (key) => {
+  const removeFromFavorites = async (id) => {
     try {
-      setFavoritos(favoritos.filter(objeto => objeto.id !== key));
-      await AsyncStorage.removeItem(key);
-      console.log('Objeto eliminado exitosamente');
+      const updatedFavorites = favorites.filter(item => item.id !== id);
+      setFavorites(updatedFavorites);
+      await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      console.log('Elemento eliminado de favoritos exitosamente');
     } catch (error) {
-      console.error('Error al eliminar el objeto:', error);
+      console.error('Error al eliminar de favoritos:', error);
+    }
+  };
+
+  const addToCart = async (item) => {
+    try {
+      // Lógica para agregar el elemento al carrito
+      console.log('Elemento agregado al carrito:', item);
+    } catch (error) {
+      console.error('Error al agregar al carrito:', error);
     }
   };
 
@@ -43,57 +51,40 @@ const Favorite = () => {
     navigation.navigate('Details', { ...item });
   };
 
-  const CartCard = ({ objeto }) => {
+  const CartCard = ({ item }) => {
     return (
-      <View style={styles.cartContainer}>
-        <View style={styles.cartCard}>
-          <Image source={objeto.image} style={styles.image} />
-          <View style={styles.details}>
-            <Text style={styles.name}>{objeto.name}</Text>
-            <Text style={styles.ingredients}>{objeto.ingredients}</Text>
-            <Text style={styles.price}>${objeto.price}</Text>
-          </View>
-          <View style={styles.quantityContainer}>
-            <TouchableOpacity onPress={() => goToDetails(objeto)}>
-              <AntDesign name="infocirlceo" size={25} color={'black'} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => eliminarObjeto(objeto.id)}>
-              <AntDesign name="delete" size={25} color={'black'} />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+      <TouchableOpacity onPress={() => goToDetails(item)}>
+        <Animatable.View animation="fadeIn" duration={500} style={FavoriteStyles.cartContainer}>
+          <Animatable.View animation="bounceIn" delay={100} style={FavoriteStyles.cartCard}>
+            <Image source={item.image} style={FavoriteStyles.image} />
+            <View style={FavoriteStyles.details}>
+              <Text style={FavoriteStyles.name}>{item.name}</Text>
+              <Text style={FavoriteStyles.ingredients}>{item.ingredients}</Text>
+              <Text style={FavoriteStyles.price}>${item.price}</Text>
+            </View>
+            <View style={FavoriteStyles.quantityContainer}>
+              <TouchableOpacity onPress={() => removeFromFavorites(item.id)}>
+                <AntDesign name="delete" size={25} color={'black'} />
+              </TouchableOpacity>
+            </View>
+          </Animatable.View>
+        </Animatable.View>
+      </TouchableOpacity>
     );
   };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
-      <View style={styles.container} >
-        <View style={styles.header}>
+    <GestureHandlerRootView style={FavoriteStyles.container}>
+      <View style={FavoriteStyles.container}>
+        <Animatable.View animation="slideInDown" duration={500} style={FavoriteStyles.header}>
           <AntDesign name="left" size={30} onPress={navigation.goBack} />
-          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Cart</Text>
-        </View>
+          <Text style={FavoriteStyles.headerText}>Favoritos</Text>
+        </Animatable.View>
         <FlatList
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 80 }}
-          data={favoritos}
-          renderItem={({ item }) => <CartCard objeto={item} />}
-          ListFooterComponentStyle={{ paddingHorizontal: 20, marginTop: 20 }}
-          ListFooterComponent={() => (
-            <View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginVertical: 15,
-                }}>
-                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Precio Total</Text>
-                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>$50</Text>
-              </View>
-              <View style={{ marginHorizontal: 30 }}>
-              </View>
-            </View>
-          )}
+          contentContainerStyle={FavoriteStyles.flatListContainer}
+          data={favorites}
+          renderItem={({ item }) => <CartCard item={item} />}
         />
       </View>
     </GestureHandlerRootView>
