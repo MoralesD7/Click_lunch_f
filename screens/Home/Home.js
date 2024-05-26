@@ -6,7 +6,6 @@ import foods from '../../consts/foods';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Favorite from '../Favorite/Favorite';
 
 const sections = [
   { name: 'Todo', image: require('../../assets/images/todo.png') },
@@ -26,7 +25,6 @@ const Home = () => {
 
   const updateFavorites = async (updatedFavorites) => {
     setFavorites(updatedFavorites);
-    // Actualizar favoritos en AsyncStorage u otros métodos necesarios
   };
 
   const filterFoodsByName = (text) => {
@@ -44,23 +42,17 @@ const Home = () => {
 
   const toggleFavorite = async (food) => {
     try {
-      // Verificar si el alimento ya está en favoritos
       const isFavorite = favorites.some(item => item.id === food.id);
+      let updatedFavorites;
+
       if (isFavorite) {
-        // Si está en favoritos, eliminarlo
-        const updatedFavorites = favorites.filter(item => item.id !== food.id);
-        setFavorites(updatedFavorites);
-        await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+        updatedFavorites = favorites.filter(item => item.id !== food.id);
       } else {
-        // Si no está en favoritos, agregarlo
-        const updatedFavorites = [...favorites, food];
-        setFavorites(updatedFavorites);
-        await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+        updatedFavorites = [...favorites, food];
       }
 
-      // Redirigir a la pantalla de favoritos
-      navigation.navigate('Favorite');
-
+      setFavorites(updatedFavorites);
+      await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
     } catch (error) {
       console.error('Error al actualizar favoritos:', error);
     }
@@ -121,7 +113,7 @@ const Home = () => {
           )}
         </View>
         {!searchActive && (
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{marginBottom: -10}}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {sections.map((section, index) => (
               <View key={index}>
                 <TouchableOpacity
@@ -132,9 +124,9 @@ const Home = () => {
                     height: 100,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor:'#FCF3E6',
+                    backgroundColor: '#FCF3E6',
                     borderRadius: 10,
-                    borderColor:'#F9813A',
+                    borderColor: '#F9813A',
                     borderWidth: 2,
                     margin: 16,
                     elevation: 5,
@@ -163,7 +155,6 @@ const Home = () => {
             ))}
           </ScrollView>
         )}
-        <Favorite updateFavorites={updateFavorites} />
       </View>
       <ScrollView showsVerticalScrollIndicator={true}>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>

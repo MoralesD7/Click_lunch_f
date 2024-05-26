@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
 
 const FavoriteStyles = StyleSheet.create({
   container: {
@@ -6,10 +8,10 @@ const FavoriteStyles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   header: {
-    flexDirection: 'row',
+    flexDirection: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 30,
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
     backgroundColor: '#fff',
@@ -18,7 +20,8 @@ const FavoriteStyles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: 10,
+    marginLeft: 'auto', // Ajustado para que el título "Favoritos" esté en el centro
+    marginRight: 'auto', // Ajustado para que el título "Favoritos" esté en el centro
     color: '#333',
   },
   flatListContainer: {

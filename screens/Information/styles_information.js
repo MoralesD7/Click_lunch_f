@@ -5,6 +5,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+  header: {
+    paddingVertical: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 20,
+  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',

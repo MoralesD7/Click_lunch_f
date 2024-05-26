@@ -77,7 +77,6 @@ const Favorite = () => {
     <GestureHandlerRootView style={FavoriteStyles.container}>
       <View style={FavoriteStyles.container}>
         <Animatable.View animation="slideInDown" duration={500} style={FavoriteStyles.header}>
-          <AntDesign name="left" size={30} onPress={navigation.goBack} />
           <Text style={FavoriteStyles.headerText}>Favoritos</Text>
         </Animatable.View>
         <FlatList

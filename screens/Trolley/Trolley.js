@@ -4,7 +4,6 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  Button,
   Modal,
 } from "react-native";
 import { GestureHandlerRootView, FlatList } from "react-native-gesture-handler";
@@ -19,7 +18,7 @@ const Trolley = () => {
   const [objetosJSON, setObjetosJSON] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [itemCounts, setItemCounts] = useState({});
-  const [isModalVisible, setIsModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigation = useNavigation();
   const isFocused = useIsFocused();
 
@@ -28,9 +27,7 @@ const Trolley = () => {
       try {
         const keys = await AsyncStorage.getAllKeys();
         const resultados = await AsyncStorage.multiGet(keys);
-        const objetosJSON = resultados.map(([key, value]) => {
-          return JSON.parse(value);
-        });
+        const objetosJSON = resultados.map(([key, value]) => JSON.parse(value));
         const itemCounts = {};
         objetosJSON.forEach((objeto) => {
           itemCounts[objeto.id] = (itemCounts[objeto.id] || 0) + 1;
@@ -76,7 +73,6 @@ const Trolley = () => {
       setTotalPrice(totalPrice);
     } else if (updatedCounts[id] > 1) {
       updatedCounts[id] -= 1;
-      const updatedItems = [...objetosJSON];
       const totalPrice = updatedItems.reduce(
         (acc, obj) => acc + obj.price * (updatedCounts[obj.id] || 0),
         0
@@ -84,25 +80,6 @@ const Trolley = () => {
       setObjetosJSON(updatedItems);
       setItemCounts(updatedCounts);
       setTotalPrice(totalPrice);
-    }
-  };
-
-  const eliminarElemento = async (id, price) => {
-    try {
-      const updatedItems = objetosJSON.filter((objeto) => objeto.id !== id);
-      const updatedCounts = { ...itemCounts };
-      delete updatedCounts[id];
-      const totalPrice = updatedItems.reduce(
-        (acc, obj) => acc + obj.price * (updatedCounts[obj.id] || 0),
-        0
-      );
-      setObjetosJSON(updatedItems);
-      setItemCounts(updatedCounts);
-      setTotalPrice(totalPrice);
-      await AsyncStorage.removeItem(id.toString());
-      console.log("Objeto eliminado exitosamente");
-    } catch (error) {
-      console.error("Error al eliminar el objeto:", error);
     }
   };
 
@@ -123,9 +100,19 @@ const Trolley = () => {
   };
 
   const pagarCarrito = () => {
-    // Lógica para procesar el pago del carrito
-    console.log("Procesando el pago del carrito...");
-    setIsModalVisible(true); // Abrir el modal al pagar el carrito
+    setIsModalVisible(true);
+  };
+
+  const confirmarCompra = () => {
+    const fechaCompra = new Date().toLocaleString(); // Obtener la fecha y hora de la compra
+    const historialCompras = objetosJSON.map((objeto) => ({
+      fecha: fechaCompra,
+      monto: objeto.price * itemCounts[objeto.id],
+      producto: objeto.name,
+    }));
+    setIsModalVisible(false);
+    eliminarCarrito();
+    navigation.navigate("Information", { historial: historialCompras });
   };
 
   const CartCard = ({ objeto }) => {
@@ -140,11 +127,6 @@ const Trolley = () => {
               <Text style={styles.name}>{objeto.name}</Text>
               <Text style={styles.ingredients}>{objeto.ingredients}</Text>
               <Text style={styles.price}>${objeto.price}</Text>
-              <Button
-                title="Eliminar"
-                color="red"
-                onPress={() => eliminarElemento(objeto.id, objeto.price)}
-              />
             </View>
             <View style={styles.quantityContainer}>
               <View style={styles.actionBtnContainer}>
@@ -239,9 +221,23 @@ const Trolley = () => {
           )}
         />
         <Modal transparent visible={isModalVisible}>
-          <Animatable.View animation="fadeIn" duration={500} style={styles.modalBackground}>
-            <Animatable.View animation="bounceIn" duration={1000} delay={500} style={styles.modalContainer}>
-              <Animatable.View animation="zoomIn" duration={1000} delay={1000} style={styles.modalContent}>
+          <Animatable.View
+            animation="fadeIn"
+            duration={500}
+            style={styles.modalBackground}
+          >
+            <Animatable.View
+              animation="bounceIn"
+              duration={1000}
+              delay={500}
+              style={styles.modalContainer}
+            >
+              <Animatable.View
+                animation="zoomIn"
+                duration={1000}
+                delay={1000}
+                style={styles.modalContent}
+              >
                 <TouchableOpacity
                   onPress={() => setIsModalVisible(false)}
                   style={styles.closeButton}
@@ -251,7 +247,12 @@ const Trolley = () => {
                     style={{ height: 30, width: 30 }}
                   />
                 </TouchableOpacity>
-                <Animatable.View animation="fadeIn" duration={1000} delay={1500} style={styles.modalInnerContent}>
+                <Animatable.View
+                  animation="fadeIn"
+                  duration={1000}
+                  delay={1500}
+                  style={styles.modalInnerContent}
+                >
                   <Image
                     source={require("../../assets/images/interrogacion.png")}
                     style={{ height: 80, width: 80, marginVertical: 10 }}
@@ -260,7 +261,12 @@ const Trolley = () => {
                     ¿Estás seguro de confirmar tu pedido?
                   </Text>
                 </Animatable.View>
-                <Animatable.View animation="fadeIn" duration={1000} delay={2000} style={styles.modalButtonsContainer}>
+                <Animatable.View
+                  animation="fadeIn"
+                  duration={1000}
+                  delay={2000}
+                  style={styles.modalButtonsContainer}
+                >
                   <TouchableOpacity
                     onPress={() => setIsModalVisible(false)}
                     style={[styles.cancelButton, { marginRight: 10 }]}
@@ -268,7 +274,7 @@ const Trolley = () => {
                     <Text style={styles.buttonText}>Cancelar</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    onPress={() => setIsModalVisible(false)}
+                    onPress={confirmarCompra}
                     style={[styles.confirmButton, { marginLeft: 10 }]}
                   >
                     <Text style={styles.buttonText}>Confirmar</Text>
