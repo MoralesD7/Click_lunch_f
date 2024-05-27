@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
-import * as Animatable from 'react-native-animatable'; // Importa la biblioteca de animaciones
+import * as Animatable from 'react-native-animatable';
+import { LinearGradient } from 'expo-linear-gradient';
 import FavoriteStyles from "../Favorite/styles_favorite";
+import { useFonts } from 'expo-font';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Favorite = () => {
   const [favorites, setFavorites] = useState([]);
   const navigation = useNavigation();
   const isFocusedFavorite = useIsFocused();
+  const [fontsLoaded] = useFonts({
+    'MochiyPopOne-Regular': require('../../assets/fonts/MochiyPopOne-Regular.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   useEffect(() => {
     const loadFavorites = async () => {
@@ -26,24 +35,16 @@ const Favorite = () => {
     };
     loadFavorites();
   }, [isFocusedFavorite]);
-
+  
   const removeFromFavorites = async (id) => {
     try {
       const updatedFavorites = favorites.filter(item => item.id !== id);
       setFavorites(updatedFavorites);
       await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       console.log('Elemento eliminado de favoritos exitosamente');
+      navigation.navigate('Home');
     } catch (error) {
       console.error('Error al eliminar de favoritos:', error);
-    }
-  };
-
-  const addToCart = async (item) => {
-    try {
-      // Lógica para agregar el elemento al carrito
-      console.log('Elemento agregado al carrito:', item);
-    } catch (error) {
-      console.error('Error al agregar al carrito:', error);
     }
   };
 
@@ -62,9 +63,9 @@ const Favorite = () => {
               <Text style={FavoriteStyles.ingredients}>{item.ingredients}</Text>
               <Text style={FavoriteStyles.price}>${item.price}</Text>
             </View>
-            <View style={FavoriteStyles.quantityContainer}>
+            <View style={FavoriteStyles.deleteIconContainer}>
               <TouchableOpacity onPress={() => removeFromFavorites(item.id)}>
-                <AntDesign name="delete" size={25} color={'black'} />
+                <MaterialCommunityIcons name="delete" size={35} color={'black'} />
               </TouchableOpacity>
             </View>
           </Animatable.View>
@@ -75,17 +76,18 @@ const Favorite = () => {
 
   return (
     <GestureHandlerRootView style={FavoriteStyles.container}>
-      <View style={FavoriteStyles.container}>
-        <Animatable.View animation="slideInDown" duration={500} style={FavoriteStyles.header}>
-          <Text style={FavoriteStyles.headerText}>Favoritos</Text>
-        </Animatable.View>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={FavoriteStyles.flatListContainer}
-          data={favorites}
-          renderItem={({ item }) => <CartCard item={item} />}
-        />
-      </View>
+        <View style={FavoriteStyles.innerContainer}>
+          <Animatable.View animation="slideInDown" duration={500} style={FavoriteStyles.header}>
+            <Text style={FavoriteStyles.headerText}>Favoritos</Text>
+          </Animatable.View>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={FavoriteStyles.flatListContainer}
+            data={favorites}
+            renderItem={({ item }) => <CartCard item={item} />}
+            keyExtractor={(item) => item.id.toString()} // Añadido para evitar advertencias de FlatList
+          />
+        </View>
     </GestureHandlerRootView>
   );
 };

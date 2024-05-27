@@ -1,83 +1,78 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-const windowWidth = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 
 const FavoriteStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+  },
+  gradient: {
+    flex: 1,
   },
   header: {
-    flexDirection: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingVertical: 30,
+    paddingHorizontal: width * 0.03,
+    paddingVertical: height * 0.03,
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     elevation: 3,
   },
   headerText: {
-    fontSize: 20,
+    fontSize: width * 0.05,
     fontWeight: 'bold',
-    marginLeft: 'auto', // Ajustado para que el título "Favoritos" esté en el centro
-    marginRight: 'auto', // Ajustado para que el título "Favoritos" esté en el centro
-    color: '#333',
+    color: '#333', // Aseguramos que el color sea visible en el degradado
+    fontFamily: 'Poppins-Regular',
   },
   flatListContainer: {
-    paddingHorizontal: 10,
-    paddingVertical: 15,
+    paddingHorizontal: width * 0.03,
+    paddingVertical: height * 0.02,
   },
   cartContainer: {
-    marginBottom: 15,
-    borderRadius: 10,
+    marginBottom: height * 0.02,
+    borderRadius: 30,
     overflow: 'hidden',
     elevation: 2,
-    backgroundColor: '#fff',
+    backgroundColor: '#FDF3E7',
   },
+  innerContainer:{flex:1},
   cartCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 15,
+    padding: width * 0.04,
   },
   image: {
-    width: 100,
-    height: 100,
+    width: width * 0.25,
+    height: width * 0.25,
     resizeMode: 'cover',
     borderRadius: 5,
-    marginRight: 15,
+    marginRight: width * 0.03,
   },
   details: {
     flex: 1,
   },
   name: {
-    fontSize: 18,
+    fontSize: width * 0.045,
     fontWeight: 'bold',
     color: '#333',
   },
   ingredients: {
-    fontSize: 14,
+    fontSize: width * 0.035,
     color: '#666',
-    marginTop: 5,
+    marginTop: height * 0.005,
   },
   price: {
-    fontSize: 16,
+    fontSize: width * 0.04,
     fontWeight: 'bold',
-    marginTop: 10,
-    color: '#e91e63',
-  },
-  deleteIcon: {
-    marginLeft: 'auto',
+    marginTop: height * 0.01,
+    color: 'black',
   },
   deleteIconContainer: {
     backgroundColor: '#fff',
     borderRadius: 20,
-    padding: 10,
-  },
-  deleteIconWrapper: {
-    backgroundColor: '#e91e63',
-    borderRadius: 20,
-    padding: 8,
+    padding: width * 0.025,
   },
 });
 

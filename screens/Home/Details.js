@@ -1,4 +1,3 @@
-
 import { Button, Modal, View, Text, Image, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -10,36 +9,25 @@ import { useState } from 'react';
 
 const Details = ({ navigation, route }) => {
 
-  //Ojo aquí cuate, checate esta
-
-  //Se crea un estado en react para controlar cuando se ve el modal
   const [modalVisible, setModalVisible] = useState(false);
 
   const item = route.params;
 
-  //Primero convertimos a JSON el "objeto" food que tienes en foods.js
   const foodDetails = foods.find(food => food.id === item.id);
 
-  // Convertir foodDetails a una cadena JSON
   const foodDetailsString = JSON.stringify(foodDetails);
 
-  //Luego hacemos una función que se encarga de guardar localmente el objeto en cuestión
-  //Esta función solo sirve cuando tenemos un objeto a la vez, así que si la necesitas para multiples objetos entonces debes de cambiar la manera en la que llamas al foods
   const guardarObjeto = async () => {
     try {
-      // Guardar el objeto JSON en el almacenamiento local
-
       await AsyncStorage.setItem(foodDetails.id.toString(), foodDetailsString);
-      //await AsyncStorage.removeItem(foodDetails.id.toString());
       console.log('Objeto JSON guardado exitosamente');
-      setModalVisible(true)
-      // Actualizar el estado de objetosJSON en el componente del carrito
+      setModalVisible(true);
       navigation.navigate('Carrito', { refresh: true });
     } catch (error) {
-      //Si hay algún error aquí aparecerá
       console.error('Error al guardar el objeto JSON:', error);
     }
   };
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={{ backgroundColor: 'white', flex: 1 }}>
@@ -81,13 +69,13 @@ const Details = ({ navigation, route }) => {
               </View>
               <View style={styles.detailsRow}>
                 <Text style={styles.detailsText}>Precio: ${foodDetails.price}</Text>
-                <TouchableOpacity
-                  style={styles.addToCartBtn}
-                  onPress={() => { guardarObjeto() }}
-                >
-                  <AntDesign name="plus" size={20} color={'white'} />
-                </TouchableOpacity>
               </View>
+              <TouchableOpacity
+                style={styles.addToCartBtn}
+                onPress={() => { guardarObjeto() }}
+              >
+                <Text style={styles.addToCartText}>Agregar al Carrito</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>

@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  Modal,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity, Modal } from "react-native";
 import { GestureHandlerRootView, FlatList } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import styles from "../Trolley/styles_trolley";
 import * as Animatable from "react-native-animatable";
 
@@ -139,7 +132,7 @@ const Trolley = () => {
                 <TouchableOpacity
                   onPress={() => decrementarCantidad(objeto.id)}
                 >
-                  <FontAwesome name="remove" size={25} color={"black"} />
+                  <AntDesign name="minuscircleo" size={25} color={"black"} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -150,9 +143,7 @@ const Trolley = () => {
   };
 
   return (
-    <GestureHandlerRootView
-      style={{ flex: 1, backgroundColor: "rgba(255, 255, 255, 0.8)" }}
-    >
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.header}>
           <AntDesign name="left" size={30} onPress={navigation.goBack} />
@@ -163,6 +154,7 @@ const Trolley = () => {
           contentContainerStyle={{ paddingBottom: 80 }}
           data={objetosJSON}
           renderItem={({ item }) => <CartCard objeto={item} />}
+          keyExtractor={(item, index) => index.toString()} // Usar el índice como clave
           ListFooterComponentStyle={{ paddingHorizontal: 20, marginTop: 20 }}
           ListFooterComponent={() => (
             <View>
@@ -220,15 +212,16 @@ const Trolley = () => {
             </View>
           )}
         />
+
         <Modal transparent visible={isModalVisible}>
           <Animatable.View
             animation="fadeIn"
-            duration={500}
+            duration={300}
             style={styles.modalBackground}
           >
             <Animatable.View
               animation="bounceIn"
-              duration={1000}
+              duration={500}
               delay={500}
               style={styles.modalContainer}
             >

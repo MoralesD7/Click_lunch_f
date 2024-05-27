@@ -4,7 +4,7 @@ import styles from "../Home/styles_home";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import foods from '../../consts/foods';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation,useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const sections = [
@@ -22,22 +22,34 @@ const Home = () => {
   const [searchActive, setSearchActive] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const navigation = useNavigation();
+  const isFocusedFavorite = useIsFocused();
 
-  const updateFavorites = async (updatedFavorites) => {
-    setFavorites(updatedFavorites);
-  };
-
-  const filterFoodsByName = (text) => {
-    const filtered = foods.filter(food =>
-      food.name.toLowerCase().includes(text.toLowerCase())
-    );
-    setFilteredFoods(filtered);
-  };
+  useEffect(() => {
+    const loadFavorites = async () => {
+      try {
+        const favoritesString = await AsyncStorage.getItem('favorites');
+        if (favoritesString) {
+          const favoritesData = JSON.parse(favoritesString);
+          setFavorites(favoritesData);
+        }
+      } catch (error) {
+        console.error('Error al cargar favoritos:', error);
+      }
+    };
+    loadFavorites();
+  }, [isFocusedFavorite]);
 
   const clearSearch = () => {
     setSearchText('');
     setFilteredFoods(foods);
     setSearchActive(false);
+  };
+
+  const markFavorites = (foods, favorites) => {
+    return foods.map(food => ({
+      ...food,
+      isFavorite: favorites.some(fav => fav.id === food.id)
+    }));
   };
 
   const toggleFavorite = async (food) => {
@@ -57,7 +69,6 @@ const Home = () => {
       console.error('Error al actualizar favoritos:', error);
     }
   };
-
   const isFavorite = (food) => {
     return favorites.some(item => item.id === food.id);
   };
@@ -157,9 +168,9 @@ const Home = () => {
         )}
       </View>
       <ScrollView showsVerticalScrollIndicator={true}>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-          {filteredFoods.map((item, index) => (
-            <Card key={index} food={item} index={index} />
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+          {markFavorites(filteredFoods, favorites).map((item, index) => (
+            <Card key={index} food={item} index={index} toggleFavorite={toggleFavorite} />
           ))}
         </View>
       </ScrollView>

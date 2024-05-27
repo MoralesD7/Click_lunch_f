@@ -1,66 +1,78 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   header: {
-    paddingVertical: 20,
+    paddingVertical: height * 0.04,
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 20,
+    marginHorizontal: width * 0.05,
   },
   cartContainer: {
-    paddingHorizontal: 20,
-    marginBottom: 10,
+    paddingHorizontal: width * 0.05,
+    marginBottom: height * 0.01,
   },
   cartCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FAFAFA',
-    borderRadius: 10,
+    backgroundColor: '#FFF',
+    borderRadius: width * 0.03,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
     elevation: 5,
-    marginBottom: 10,
+    marginBottom: height * 0.01,
+    paddingVertical: height * 0.015,
+    paddingHorizontal: width * 0.04,
   },
   image: {
-    height: 70,
-    width: 70,
-    borderRadius: 10,
-    marginRight: 10,
+    height: width * 0.25,
+    width: width * 0.25,
+    borderRadius: width * 0.03,
+    marginRight: width * 0.04,
   },
   details: {
     flex: 1,
   },
   name: {
-    fontSize: 16,
+    fontSize: width * 0.04,
     fontWeight: 'bold',
+    marginBottom: height * 0.005,
+    color: '#333',
   },
   ingredients: {
-    fontSize: 13,
-    color: 'grey',
+    fontSize: width * 0.035,
+    color: '#666',
+    marginBottom: height * 0.005,
   },
   price: {
-    fontSize: 17,
+    fontSize: width * 0.04,
     fontWeight: 'bold',
+    color: '#333',
   },
   quantityContainer: {
-    marginRight: 10,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between', // Alinea los botones de incrementar y decrementar
   },
   quantity: {
     fontWeight: 'bold',
-    fontSize: 18,
-    marginBottom: 20,
-    marginHorizontal: 5, // Añade un margen horizontal para separar la cantidad del botón de eliminar
+    fontSize: width * 0.04,
+    marginHorizontal: width * 0.03,
+    color: '#333',
   },
   actionBtnContainer: {
-    width: 70,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 15,
+    alignItems: 'center',
+    marginTop: height * 0.01,
   },
   deleteButton: {
     marginLeft: 'auto',
-    marginHorizontal:10,
+    paddingHorizontal: width * 0.03,
   },
   modalBackground: {
     flex: 1,
@@ -69,13 +81,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContainer: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
+    backgroundColor: '#FFF',
+    borderRadius: width * 0.03,
     width: '90%',
-    height:'45%'
+    height: '45%',
   },
   modalContent: {
-    padding: 20,
+    padding: width * 0.05,
   },
   closeButton: {
     alignSelf: 'flex-end',
@@ -84,27 +96,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalText: {
-    fontSize: 18,
+    fontSize: width * 0.04,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: height * 0.02,
+    color: '#333',
   },
   modalButtonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: height * 0.02,
   },
   cancelButton: {
     backgroundColor: '#FF6347',
-    padding: 10,
-    borderRadius: 5,
+    paddingVertical: height * 0.015,
+    paddingHorizontal: width * 0.04,
+    borderRadius: width * 0.03,
   },
   confirmButton: {
     backgroundColor: '#32CD32',
-    padding: 10,
-    borderRadius: 5,
+    paddingVertical: height * 0.015,
+    paddingHorizontal: width * 0.04,
+    borderRadius: width * 0.03,
   },
   buttonText: {
-    color: '#fff',
-    fontSize: 16,
+    color: '#FFF',
+    fontSize: width * 0.04,
     textAlign: 'center',
   },
 });

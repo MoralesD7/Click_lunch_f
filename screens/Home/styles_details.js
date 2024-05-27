@@ -1,102 +1,108 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   header: {
-    paddingVertical: 20,
+    paddingVertical: height * 0.025, // 2.5% of screen height
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 20,
+    marginHorizontal: width * 0.05, // 5% of screen width
   },
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 280,
-    marginBottom: 30, // Ajusta el margen inferior para crear más separación
+    height: height * 0.35, // 35% of screen height
+    marginBottom: height * 0.0375, // 3.75% of screen height
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2, // Reducir la altura de la sombra
+      height: 2, // fixed shadow height
     },
-    shadowOpacity: 0.3, // Reducir la opacidad de la sombra
-    shadowRadius: 2, // Reducir el radio de la sombra
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
     elevation: 5,
   },
   imageBorder: {
-    borderWidth: 5, // Ajusta el ancho del borde
-    borderColor: '#FAB97B', // Cambia el color del borde
-    borderRadius: 25, // Ajusta el radio del borde para esquinas redondeadas
+    borderWidth: width * 0.0125, // 1.25% of screen width
+    borderColor: '#FAB97B',
+    borderRadius: width * 0.0625, // 6.25% of screen width
     overflow: 'hidden',
-    padding: 30, // Añade un espacio entre la imagen y el borde
+    padding: width * 0.075, // 7.5% of screen width
   },
   image: {
-    height: 200,
-    width: 200,
+    height: height * 0.25, // 25% of screen height
+    width: height * 0.25, // 25% of screen height to keep it square
     resizeMode: 'cover',
-    borderRadius: 10,
-    // Ajusta el radio de la imagen para esquinas redondeadas
+    borderRadius: width * 0.025, // 2.5% of screen width
   },
   details: {
     backgroundColor: '#F9813A',
-    borderTopRightRadius: 40,
-    borderTopLeftRadius: 40,
-    paddingBottom: 100,
+    borderTopRightRadius: width * 0.1, // 10% of screen width
+    borderTopLeftRadius: width * 0.1, // 10% of screen width
+    paddingBottom: height * 0.2, // 20% of screen height (increased to cover the whole screen)
+    flex: 1,
   },
   detailsHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    marginTop: 20,
-    marginBottom: 30,
+    paddingHorizontal: width * 0.05, // 5% of screen width
+    marginTop: height * 0.025, // 2.5% of screen height
+    marginBottom: height * 0.0375, // 3.75% of screen height
   },
   iconContainer: {
     backgroundColor: 'white',
-    height: 50,
-    width: 50,
+    height: width * 0.125, // 12.5% of screen width
+    width: width * 0.125, // 12.5% of screen width to keep it square
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 25,
+    borderRadius: width * 0.0625, // 6.25% of screen width
   },
   detailsTitle: {
-    fontSize: 25,
+    fontSize: width * 0.0625, // 6.25% of screen width
     fontWeight: 'bold',
     color: 'white',
   },
   detailsInfo: {
-    paddingHorizontal: 20,
-    marginBottom: 40,
+    paddingHorizontal: width * 0.05, // 5% of screen width
+    marginBottom: height * 0.05, // 5% of screen height
   },
   detailsRow: {
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(255, 255, 255, 0.5)',
-    paddingBottom: 10,
-    marginBottom: 20,
+    paddingBottom: height * 0.0125, // 1.25% of screen height
+    marginBottom: height * 0.025, // 2.5% of screen height
   },
   detailsText: {
-    fontSize: 16,
+    fontSize: width * 0.04, // 4% of screen width
     color: 'white',
   },
   addToCartBtn: {
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    bottom: 1,
-    right: 1,
     backgroundColor: '#FF6347',
-    borderRadius: 30,
-    width: 40,
-    height: 40,
-    elevation: 5,
+    borderRadius: width * 0.05, // 5% of screen width
+    paddingVertical: height * 0.015, // 1.5% of screen height
+    paddingHorizontal: width * 0.3, // 30% of screen width to make it wide
+    alignSelf: 'center',
+    marginTop: height * 0.02, // 2% of screen height to give some spacing from the price
+    elevation: 10,
+  },
+  addToCartText: {
+    color: 'white',
+    fontSize: width * 0.04, // 4% of screen width
+    fontWeight: 'bold',
+    textAlign: 'center', // Ensure the text is centered
   },
   favoriteBtn: {
-    bottom: 20,
-    right: 100,
+    bottom: height * 0.025, // 2.5% of screen height
+    right: width * 0.25, // 25% of screen width
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 50,
-    height: 50,
+    width: width * 0.125, // 12.5% of screen width
+    height: width * 0.125, // 12.5% of screen width to keep it square
   },
 });
 
