@@ -3,6 +3,9 @@ import { StyleSheet, Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1, // Ajusta el contenedor principal para ocupar toda la pantalla
+  },
   header: {
     paddingVertical: height * 0.04,
     flexDirection: 'row',

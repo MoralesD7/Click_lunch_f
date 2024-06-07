@@ -1,25 +1,28 @@
+import React, { useState } from 'react';
 import { Button, Modal, View, Text, Image, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from '../Home/styles_details';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import foods from '../../consts/foods';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState } from 'react';
 
 const Details = ({ navigation, route }) => {
-
   const [modalVisible, setModalVisible] = useState(false);
 
   const item = route.params;
 
-  const foodDetails = foods.find(food => food.id === item.id);
-
-  const foodDetailsString = JSON.stringify(foodDetails);
-
   const guardarObjeto = async () => {
     try {
-      await AsyncStorage.setItem(foodDetails.id.toString(), foodDetailsString);
+      // Asegúrate de que los nombres de las propiedades coincidan con los esperados en Trolley
+      const itemToSave = {
+        id: item.id,
+        name: item.nombre,  // Asegúrate de usar "name" en lugar de "nombre"
+        image: { uri: item.url }, // Usa "image" en lugar de "url" y asegúrate de que sea un objeto con "uri"
+        ingredients: item.descripcion, // Usa "ingredients" en lugar de "descripcion"
+        price: item.costo, // Usa "price" en lugar de "costo"
+      };
+
+      await AsyncStorage.setItem(item.id.toString(), JSON.stringify(itemToSave));
       console.log('Objeto JSON guardado exitosamente');
       setModalVisible(true);
       navigation.navigate('Carrito', { refresh: true });
@@ -38,7 +41,7 @@ const Details = ({ navigation, route }) => {
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}>
           <View style={styles.imageContainer}>
             <View style={styles.imageBorder}>
-              <Image source={item.image} style={styles.image} />
+              <Image source={{ uri: item.url }} style={styles.image} />
             </View>
           </View>
           <View style={styles.details}>
@@ -58,21 +61,21 @@ const Details = ({ navigation, route }) => {
               </View>
             </Modal>
             <View style={styles.detailsHeader}>
-              <Text style={styles.detailsTitle}>{item.name}</Text>
+              <Text style={styles.detailsTitle}>{item.nombre}</Text>
             </View>
             <View style={styles.detailsInfo}>
               <View style={styles.detailsRow}>
-                <Text style={styles.detailsText}>Descripción: {foodDetails.description}</Text>
+                <Text style={styles.detailsText}>Descripción: {item.descripcion}</Text>
               </View>
               <View style={styles.detailsRow}>
-                <Text style={styles.detailsText}>Tiempo de preparación: {foodDetails.preparationTime}</Text>
+                <Text style={styles.detailsText}>Precio: ${item.costo}</Text>
               </View>
               <View style={styles.detailsRow}>
-                <Text style={styles.detailsText}>Precio: ${foodDetails.price}</Text>
+                <Text style={styles.detailsText}>Tiempo de preparación: {item.tiempo_preparacion} minutos</Text>
               </View>
               <TouchableOpacity
                 style={styles.addToCartBtn}
-                onPress={() => { guardarObjeto() }}
+                onPress={guardarObjeto}
               >
                 <Text style={styles.addToCartText}>Agregar al Carrito</Text>
               </TouchableOpacity>

@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation, useIsFocused } from '@react-navigation/native';
-import * as Animatable from 'react-native-animatable';
+import React, { useEffect, useState } from "react";
+import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
+import * as Animatable from "react-native-animatable";
 import FavoriteStyles from "../Favorite/styles_favorite";
-import { useFonts } from 'expo-font';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useFonts } from "expo-font";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Favorite = () => {
   const [favorites, setFavorites] = useState([]);
   const navigation = useNavigation();
   const isFocusedFavorite = useIsFocused();
   const [fontsLoaded] = useFonts({
-    'MochiyPopOne-Regular': require('../../assets/fonts/MochiyPopOne-Regular.ttf'),
+    "MochiyPopOne-Regular": require("../../assets/fonts/MochiyPopOne-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -23,13 +23,13 @@ const Favorite = () => {
   useEffect(() => {
     const loadFavorites = async () => {
       try {
-        const favoritesString = await AsyncStorage.getItem('favorites');
+        const favoritesString = await AsyncStorage.getItem("favorites");
         if (favoritesString) {
           const favoritesData = JSON.parse(favoritesString);
           setFavorites(favoritesData);
         }
       } catch (error) {
-        console.error('Error al cargar favoritos:', error);
+        console.error("Error al cargar favoritos:", error);
       }
     };
     loadFavorites();
@@ -41,7 +41,6 @@ const Favorite = () => {
       setFavorites(updatedFavorites);
       await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       console.log('Elemento eliminado de favoritos exitosamente');
-      navigation.navigate('Home');
     } catch (error) {
       console.error('Error al eliminar de favoritos:', error);
     }
@@ -56,7 +55,7 @@ const Favorite = () => {
       <TouchableOpacity onPress={() => goToDetails(item)}>
         <Animatable.View animation="fadeIn" duration={500} style={FavoriteStyles.cartContainer}>
           <Animatable.View animation="bounceIn" delay={100} style={FavoriteStyles.cartCard}>
-            <Image source={item.image} style={FavoriteStyles.image} />
+            <Image source={{ uri: item.image }} style={FavoriteStyles.image} />
             <View style={FavoriteStyles.details}>
               <Text style={FavoriteStyles.name}>{item.name}</Text>
               <Text style={FavoriteStyles.ingredients}>{item.ingredients}</Text>

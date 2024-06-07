@@ -56,6 +56,7 @@ const Trolley = () => {
 
   const decrementarCantidad = (id) => {
     const updatedCounts = { ...itemCounts };
+  
     if (updatedCounts[id] === 1) {
       delete updatedCounts[id];
       const updatedItems = objetosJSON.filter((objeto) => objeto.id !== id);
@@ -68,15 +69,15 @@ const Trolley = () => {
       setTotalPrice(totalPrice);
     } else if (updatedCounts[id] > 1) {
       updatedCounts[id] -= 1;
-      const totalPrice = updatedItems.reduce(
+      const totalPrice = objetosJSON.reduce(
         (acc, obj) => acc + obj.price * (updatedCounts[obj.id] || 0),
         0
       );
-      setObjetosJSON(updatedItems);
       setItemCounts(updatedCounts);
       setTotalPrice(totalPrice);
     }
   };
+  
 
   const eliminarCarrito = async () => {
     try {
