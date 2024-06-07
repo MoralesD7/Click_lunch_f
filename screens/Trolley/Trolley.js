@@ -19,8 +19,8 @@ const Trolley = () => {
     const obtenerTodosLosElementos = async () => {
       try {
         const keys = await AsyncStorage.getAllKeys();
-        const resultados = await AsyncStorage.multiGet(keys);
-        const objetosJSON = resultados.map(([key, value]) => JSON.parse(value));
+        const results = await AsyncStorage.multiGet(keys);
+        const objetosJSON = results.map(([key, value]) => JSON.parse(value)).filter(item => item && item.id);
         const itemCounts = {};
         objetosJSON.forEach((objeto) => {
           itemCounts[objeto.id] = (itemCounts[objeto.id] || 0) + 1;
@@ -36,7 +36,9 @@ const Trolley = () => {
         console.error("Error al obtener todos los elementos:", error);
       }
     };
-    obtenerTodosLosElementos();
+    if (isFocused) {
+      obtenerTodosLosElementos();
+    }
   }, [isFocused]);
 
   const incrementarCantidad = (id) => {
@@ -109,6 +111,7 @@ const Trolley = () => {
   };
 
   const CartCard = ({ objeto }) => {
+    if (!objeto) return null;
     const count = itemCounts[objeto.id] || 0;
 
     return (
@@ -123,15 +126,11 @@ const Trolley = () => {
             </View>
             <View style={styles.quantityContainer}>
               <View style={styles.actionBtnContainer}>
-                <TouchableOpacity
-                  onPress={() => incrementarCantidad(objeto.id)}
-                >
+                <TouchableOpacity onPress={() => incrementarCantidad(objeto.id)}>
                   <AntDesign name="pluscircleo" size={25} color={"black"} />
                 </TouchableOpacity>
                 <Text style={styles.quantity}>{count}</Text>
-                <TouchableOpacity
-                  onPress={() => decrementarCantidad(objeto.id)}
-                >
+                <TouchableOpacity onPress={() => decrementarCantidad(objeto.id)}>
                   <AntDesign name="minuscircleo" size={25} color={"black"} />
                 </TouchableOpacity>
               </View>
@@ -170,12 +169,8 @@ const Trolley = () => {
                   marginVertical: 15,
                 }}
               >
-                <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                  Precio Total
-                </Text>
-                <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                  ${totalPrice.toFixed(2)}
-                </Text>
+                <Text style={{ fontSize: 18, fontWeight: "bold" }}>Precio Total</Text>
+                <Text style={{ fontSize: 18, fontWeight: "bold" }}>${totalPrice.toFixed(2)}</Text>
               </View>
               <View
                 style={{
@@ -193,9 +188,7 @@ const Trolley = () => {
                   }}
                   onPress={eliminarCarrito}
                 >
-                  <Text style={{ color: "white", fontSize: 18 }}>
-                    Eliminar Carrito
-                  </Text>
+                  <Text style={{ color: "white", fontSize: 18 }}>Eliminar Carrito</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{
@@ -214,62 +207,21 @@ const Trolley = () => {
         />
 
         <Modal transparent visible={isModalVisible}>
-          <Animatable.View
-            animation="fadeIn"
-            duration={300}
-            style={styles.modalBackground}
-          >
-            <Animatable.View
-              animation="bounceIn"
-              duration={500}
-              delay={500}
-              style={styles.modalContainer}
-            >
-              <Animatable.View
-                animation="zoomIn"
-                duration={1000}
-                delay={1000}
-                style={styles.modalContent}
-              >
-                <TouchableOpacity
-                  onPress={() => setIsModalVisible(false)}
-                  style={styles.closeButton}
-                >
-                  <Image
-                    source={require("../../assets/images/x.png")}
-                    style={{ height: 30, width: 30 }}
-                  />
+          <Animatable.View animation="fadeIn" duration={300} style={styles.modalBackground}>
+            <Animatable.View animation="bounceIn" duration={500} delay={500} style={styles.modalContainer}>
+              <Animatable.View animation="zoomIn" duration={1000} delay={1000} style={styles.modalContent}>
+                <TouchableOpacity onPress={() => setIsModalVisible(false)} style={styles.closeButton}>
+                  <Image source={require("../../assets/images/x.png")} style={{ height: 30, width: 30 }} />
                 </TouchableOpacity>
-                <Animatable.View
-                  animation="fadeIn"
-                  duration={1000}
-                  delay={1500}
-                  style={styles.modalInnerContent}
-                >
-                  <Image
-                    source={require("../../assets/images/interrogacion.png")}
-                    style={{ height: 80, width: 80, marginVertical: 10 }}
-                  />
-                  <Text style={styles.modalText}>
-                    ¿Estás seguro de confirmar tu pedido?
-                  </Text>
+                <Animatable.View animation="fadeIn" duration={1000} delay={1500} style={styles.modalInnerContent}>
+                  <Image source={require("../../assets/images/interrogacion.png")} style={{ height: 80, width: 80, marginVertical: 10 }} />
+                  <Text style={styles.modalText}>¿Estás seguro de confirmar tu pedido?</Text>
                 </Animatable.View>
-                <Animatable.View
-                  animation="fadeIn"
-                  duration={1000}
-                  delay={2000}
-                  style={styles.modalButtonsContainer}
-                >
-                  <TouchableOpacity
-                    onPress={() => setIsModalVisible(false)}
-                    style={[styles.cancelButton, { marginRight: 10 }]}
-                  >
+                <Animatable.View animation="fadeIn" duration={1000} delay={2000} style={styles.modalButtonsContainer}>
+                  <TouchableOpacity onPress={() => setIsModalVisible(false)} style={[styles.cancelButton, { marginRight: 10 }]}>
                     <Text style={styles.buttonText}>Cancelar</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={confirmarCompra}
-                    style={[styles.confirmButton, { marginLeft: 10 }]}
-                  >
+                  <TouchableOpacity onPress={confirmarCompra} style={[styles.confirmButton, { marginLeft: 10 }]}>
                     <Text style={styles.buttonText}>Confirmar</Text>
                   </TouchableOpacity>
                 </Animatable.View>

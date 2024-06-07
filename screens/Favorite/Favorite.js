@@ -4,7 +4,6 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
-import { LinearGradient } from 'expo-linear-gradient';
 import FavoriteStyles from "../Favorite/styles_favorite";
 import { useFonts } from 'expo-font';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -85,7 +84,7 @@ const Favorite = () => {
             contentContainerStyle={FavoriteStyles.flatListContainer}
             data={favorites}
             renderItem={({ item }) => <CartCard item={item} />}
-            keyExtractor={(item) => item.id.toString()} // Añadido para evitar advertencias de FlatList
+            keyExtractor={(item) => item.id.toString()}
           />
         </View>
     </GestureHandlerRootView>

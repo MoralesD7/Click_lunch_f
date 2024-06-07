@@ -36,7 +36,27 @@ const login = (email, password) => {
 	});
 };
 
+
+const getMovies = async () => {
+  try {
+    const response = await fetch('https://reactnative.dev/movies.json');
+    const json = await response.json();
+    setData(json.movies);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+
+
+
+
+
 module.exports({
   auth,
   login,
+  getMovies,
 });
