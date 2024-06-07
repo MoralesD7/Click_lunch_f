@@ -1,62 +1,66 @@
 import axios from "axios";
+
 const baseUrl = "https://clicklunchrender.onrender.com";
 
-const auth = (token) => {
-  axios
-    .get(`${baseUrl}/api/usuario/authUser`, {
+// Autenticación del usuario
+const auth = async (token) => {
+  try {
+    const res = await axios.get(`${baseUrl}/api/usuario/authUser`, {
       headers: {
         Authorization: `${token}`,
       },
-    })
-    .then((res) => {
-      if (res.status === 200) {
-        return true;
-      } else {
-        return false;
-      }
-    })
-    .catch((error) => {
-      return false;
     });
+    return res.status === 200;
+  } catch (error) {
+    return false;
+  }
 };
 
-const login = (email, password) => {
-  axios.post(`${baseUrl}/api/usuario/login`,{
-		email: email,
-		password: password,
-	}).then((res)=>{
-		if(res.status === 200){
-			const data = res.data
-			return data;	
-		} else {
-			return res.data.message
-		}
-	}).catch((error)=>{
-		console.log(error.message);
-	});
+// Login del usuario
+const login = async (email, password) => {
+  try {
+    const res = await axios.post(`${baseUrl}/api/usuario/login`, {
+      email: email,
+      password: password,
+    });
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      return res.data.message;
+    }
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
 };
 
-
+// Obtener películas (Ejemplo de uso)
 const getMovies = async () => {
   try {
     const response = await fetch('https://reactnative.dev/movies.json');
     const json = await response.json();
-    setData(json.movies);
+    return json.movies;
   } catch (error) {
     console.error(error);
-  } finally {
-    setLoading(false);
+    return [];
   }
 };
 
+// Obtener alimentos
+const getAlimentos = async () => {
+  try {
+    const response = await axios.get(`${baseUrl}/api/alimento/getAlimentos`);
+    if (response.status === 200) {
+      return response.data.message;
+    } else if (response.status === 204) {
+      throw new Error("No se han registrado alimentos en esta cafetería");
+    } else {
+      throw new Error(response.data.message);
+    }
+  } catch (error) {
+    console.error(error.message);
+    return [];
+  }
+};
 
-
-
-
-
-
-module.exports({
-  auth,
-  login,
-  getMovies,
-});
+export { auth, login, getMovies, getAlimentos };
